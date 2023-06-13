@@ -130,6 +130,8 @@ def main():
                 mostrar_tarefas_concluidas()
             elif opcao == 7:
                 print("PROGRAMA ENCERRADO")
+                from time import sleep
+                sleep(2)
                 break
             else:
                 print("Escolha inválida, digite novamente")
