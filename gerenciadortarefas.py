@@ -17,72 +17,105 @@ def adicionar_tarefa():
     try:
         tarefa = str(input("Digite a tarefa que deseja adicionar: ")).upper()
         lista_tarefas.append(tarefa)
-        print("TAREFA ADICIONADA")
+        print('-'*30)
+        print()
+        print("     TAREFA ADICIONADA")
+        print()
+        print('-'*30)
     except Exception as e:
         print(f"Erro ao adicionar a tarefa: {str(e)}")
 
 # FUNCAO LISTAR TAREFAS
 def listar_tarefas():
-    print("LISTA DE TAREFAS:")
+    print("\nLISTA DE TAREFAS A FAZER:")
     for i, tarefa in enumerate(lista_tarefas, 1):
         print(f"{i}. {tarefa}")
+    print()
 
 # FUNCAO EDITAR TAREFA
 def atualizar_tarefa():
     try:
-        nova_tarefa = input("Digite a nova tarefa: ").upper()
-        listar_tarefas()
-        tarefa_trocada = int(input("Qual número da tarefa que deseja substituir? "))
-        if tarefa_trocada >= 1 and tarefa_trocada <= len(lista_tarefas):
-            lista_tarefas[tarefa_trocada - 1] = nova_tarefa
-            print("Lista atualizada com sucesso!!")
+        while True:
+            nova_tarefa = input("Digite a nova tarefa: ").upper()
             listar_tarefas()
-        else:
-            print("Número de tarefa inválido.")
+            tarefa_trocada = int(input("Qual número da tarefa que deseja substituir? "))
+            if tarefa_trocada >= 1 and tarefa_trocada <= len(lista_tarefas):
+                lista_tarefas[tarefa_trocada - 1] = nova_tarefa
+                print('-'*30)
+                print()
+                print("     Lista atualizada com sucesso!!")
+                print()
+                print('-'*30)
+                listar_tarefas()
+                break  
+            else:
+                print('-'*30)
+                print()
+                print("     Número de tarefa inválido.")
+                print()
+                print('-'*30)
     except Exception as e:
         print(f"Erro ao atualizar a tarefa: {str(e)}")
-
 
 # FUNCAO REMOVER TAREFA
 def remover_tarefa():
     try:
-        listar_tarefas()
-        tarefa_remover = int(input("Qual número da tarefa que deseja remover? "))
-        if tarefa_remover >= 1 and tarefa_remover <= len(lista_tarefas):
-            lista_tarefas.pop(tarefa_remover - 1)
-            print("Tarefa removida com sucesso!")
+        while True:
             listar_tarefas()
-        else:
-            print("Número de tarefa inválido.")
+            tarefa_remover = int(input("Qual número da tarefa que deseja remover? "))
+            if tarefa_remover >= 1 and tarefa_remover <= len(lista_tarefas):
+                lista_tarefas.pop(tarefa_remover - 1)
+                print('-'*30)
+                print()
+                print("     Tarefa removida com sucesso!")
+                print()
+                print('-'*30)
+                listar_tarefas()
+                break  
+            else:
+                print('-'*30)
+                print()
+                print("     Número de tarefa inválido.")
+                print()
+                print('-'*30)
     except Exception as e:
         print(f"Erro ao remover a tarefa: {str(e)}")
 
 # FUNCAO CONCLUIR TAREFA
 def concluir_tarefa():
-    listar_tarefas()
-    concluida = int(input("Qual número da tarefa que deseja marcar como concluída? "))
-    if concluida >= 1 and concluida <= len(lista_tarefas):
-        tarefa_concluida = lista_tarefas[concluida - 1]
-        lista_tarefas.pop(concluida - 1)
-        tarefas_concluidas.append(tarefa_concluida)
-    else:
-        print("Número de tarefa inválido.")    
+    try:
+        while True:
+            listar_tarefas()
+            concluida = int(input("Qual número da tarefa que deseja marcar como concluída? "))
+            if concluida >= 1 and concluida <= len(lista_tarefas):
+                tarefa_concluida = lista_tarefas[concluida - 1]
+                lista_tarefas.pop(concluida - 1)
+                tarefas_concluidas.append(tarefa_concluida)
+                print(f"Tarefa n°{concluida} concluída!")
+                print()
+                break  
+            else:
+                print("Número de tarefa inválido.")
+                print()
+    except Exception as e:
+        print(f"Erro ao concluir a tarefa: {str(e)}")
 
 # FUNCAO MOSTRAR TAREFAS CONCLUIDAS
 def mostrar_tarefas_concluidas():
-    print("LISTA DE TAREFAS CONCLUIDAS:")
+    print("\nLISTA DE TAREFAS CONCLUIDAS:")
     if len(tarefas_concluidas) == 0:
         print("Nenhuma tarefa concluída.")
     else:
         for i, tarefa in enumerate(tarefas_concluidas, 1):
             print(f"{i}. {tarefa}")
+        print()
 
 # FUNCIONAMENTO PROGRAMA
 def main():
     try:
         while True:
             menu()
-            opcao = int(input("Escolha uma opção: "))
+            opcao = int(input("\nEscolha uma opção: "))
             if opcao == 1:
                 adicionar_tarefa()
             elif opcao == 2:
